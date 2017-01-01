@@ -11785,7 +11785,7 @@ div#notebook {
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># Import libraries necessary for this project</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
-<span class="kn">from</span> <span class="nn">sklearn.cross_validation</span> <span class="kn">import</span> <span class="n">ShuffleSplit</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">ShuffleSplit</span>
 
 <span class="c1"># Import supplementary visualizations code visuals.py</span>
 <span class="kn">import</span> <span class="nn">visuals</span> <span class="kn">as</span> <span class="nn">vs</span>
@@ -11814,6 +11814,8 @@ div#notebook {
 <div class="output_subarea output_stream output_stderr output_text">
 <pre>/Users/Mike/.virtualenvs/venv2/lib/python2.7/site-packages/sklearn/cross_validation.py:44: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the refactored classes and functions are moved. Also note that the interface of the new CV iterators are different from that of this module. This module will be removed in 0.20.
   &#34;This module will be removed in 0.20.&#34;, DeprecationWarning)
+/Users/Mike/.virtualenvs/venv2/lib/python2.7/site-packages/sklearn/learning_curve.py:23: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the functions are moved. This module will be removed in 0.20
+  DeprecationWarning)
 </pre>
 </div>
 </div>
@@ -11821,14 +11823,6 @@ div#notebook {
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Boston housing dataset has 489 data points with 4 variables each.
-</pre>
-</div>
-</div>
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>/Users/Mike/.virtualenvs/venv2/lib/python2.7/site-packages/sklearn/learning_curve.py:23: DeprecationWarning: This module was deprecated in version 0.18 in favor of the model_selection module into which all the functions are moved. This module will be removed in 0.20
-  DeprecationWarning)
 </pre>
 </div>
 </div>
@@ -11943,9 +11937,18 @@ Standard deviation of prices: $165,171.13
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong></p>
 <ul>
-<li>As <code>'RM'</code> <strong>increases</strong> <code>'MEDV'</code> <strong>increases</strong></li>
-<li>As <code>'LSTAT'</code> <strong>increases</strong> <code>'MEDV'</code> <strong>decreases</strong></li>
-<li>As <code>'PTRATIO'</code> <strong>increases</strong> <code>'MEDV'</code> <strong>decreases</strong></li>
+<li>As <code>'RM'</code> <strong>increases</strong> <code>'MEDV'</code> <strong>increases</strong>  <ul>
+<li>This makes sense since the number of rooms is an indication of how big the house is.  The bigger the house the greater the price.</li>
+</ul>
+</li>
+<li>As <code>'LSTAT'</code> <strong>increases</strong> <code>'MEDV'</code> <strong>decreases</strong><ul>
+<li>This makes sense since people of lower classes cannot afford higher priced homes, i.e. Houses of lower cost will reside in locations or neighborhoods that are not wealthy. </li>
+</ul>
+</li>
+<li>As <code>'PTRATIO'</code> <strong>increases</strong> <code>'MEDV'</code> <strong>decreases</strong><ul>
+<li>This makes sense since the ratio of student to teachers indicates how much resources that the school district has.  The areas that of lower class neighborhoods tend to have school districts with lower amounts of funds than wealthier area, hence they do not have quantity of teachers available to teach a the comparable number of students that are in wealthier areas.</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -12076,7 +12079,8 @@ Standard deviation of prices: $165,171.13
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> 0.923</p>
+<p><strong>Answer:</strong> 
+Yes I would consider the model to have successfully captured the variation of the target variable.  $R^2$ is a metric of how much of my change of prediction is explained by the input variables when it's processed by the model.  An $R^2$ closer to one suggests that model explains the variation of the output well and an $R^2$ closer to 0 suggests the opposite.  Hence and $R^2 = 0.923$ suggests that the model captures the variation well.</p>
 
 </div>
 </div>
@@ -13855,7 +13859,7 @@ For the top right graph <code>max_depth = 10</code>:</p>
 <li>The score of the training curve <strong>decreases</strong> approaching the expected score as more training points are added.</li>
 <li>The score of the test curve <strong>increases</strong> approaching the expected score as more training points are added.</li>
 </ul>
-<p>Yes having more points would benefit the model since we care about the <strong>test curve</strong> score <strong>increasing</strong> since that is the indication of generalization performance.</p>
+<p><strong>No</strong> having more points would not benefit the model since we care about the <strong>test curve</strong> score which since that is the indication of generalization performance. At 200 points the <strong>test curve</strong> performance has plateaued since it has seen similar data which was already used to achieve the generalization performance at the plateau.  What the curve is saying that the additional data is similar and is not seeing anything new to learn from.</p>
 
 </div>
 </div>
